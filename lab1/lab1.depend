@@ -1,15 +1,25 @@
 # depslib dependency file v1.0
-1538267595 source:d:\projects\git\oop-basics\lab1\main.cpp
+1538322467 source:d:\projects\git\oop-basics\lab1\main.cpp
 	<iostream>
 	<Dice.h>
+	<DiceSet.h>
 
-1538267595 source:d:\projects\git\oop-basics\lab1\src\dice.cpp
+1538321648 source:d:\projects\git\oop-basics\lab1\src\dice.cpp
 	"Dice.h"
 	<sstream>
 	<cmath>
 	<limits>
+	<algorithm>
 
-1538267595 d:\projects\git\oop-basics\lab1\include\dice.h
+1538322467 d:\projects\git\oop-basics\lab1\include\dice.h
 	<vector>
 	<string>
+
+1538322628 source:d:\projects\git\oop-basics\lab1\src\diceset.cpp
+	"DiceSet.h"
+	<iostream>
+
+1538322467 d:\projects\git\oop-basics\lab1\include\diceset.h
+	<Dice.h>
+	<map>
 
