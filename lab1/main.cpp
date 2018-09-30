@@ -24,5 +24,10 @@ int main()
     DiceSet ds = DiceSet(l1,r1,l2,r2);
     cout << ds.data();
 
+    map <int, double> m = ds.calc_p();
+
+    for (auto it = m.begin(); it != m.end(); it++)
+        cout << it->first << "   " << it->second << endl;
+
     return 0;
 }
