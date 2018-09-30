@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1538267595 source:d:\projects\git\oop-basics\lab1\main.cpp
+	<iostream>
+	<Dice.h>
+
+1538267595 source:d:\projects\git\oop-basics\lab1\src\dice.cpp
+	"Dice.h"
+	<sstream>
+	<cmath>
+	<limits>
+
+1538267595 d:\projects\git\oop-basics\lab1\include\dice.h
+	<vector>
+	<string>
+
