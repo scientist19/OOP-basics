@@ -36,9 +36,11 @@
 		</Compiler>
 		<Unit filename="include/Dice.h" />
 		<Unit filename="include/DiceSet.h" />
+		<Unit filename="include/Graph.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Dice.cpp" />
 		<Unit filename="src/DiceSet.cpp" />
+		<Unit filename="src/Graph.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
