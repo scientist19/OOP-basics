@@ -1,7 +1,8 @@
-#include <iostream>
-
 #include <Dice.h>
 #include <DiceSet.h>
+#include <Graph.h>
+
+#include <iostream>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ int main()
  //       cout << it->first << "   " << it->second << endl;
 
 //    cout << dice.data();
-
+    /*
     int l1,r1,l2,r2;
     cin >> l1 >> r1 >> l2 >> r2;
     DiceSet ds = DiceSet(l1,r1,l2,r2);
@@ -29,5 +30,32 @@ int main()
     for (auto it = m.begin(); it != m.end(); it++)
         cout << it->first << "   " << it->second << endl;
 
+    */
+    int n;
+    cin >> n;
+
+    Graph<int> g;
+
+    while(1){
+
+        char c;
+        int v, u, w;
+        cin >> c;
+        if (c == 'q') break;
+        if (c == 'v'){
+            cin >> v;
+            g.addv(&v);
+        }
+        else if (c == 'e'){
+
+            cin >> v >> u >> w;
+            g.adde(v, u, w);
+        }
+    }
+
+    cout << g.data();
+
+    Graph<Dice> g1;
+    g1.addv(new Dice(6));
     return 0;
 }

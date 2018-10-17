@@ -11,21 +11,21 @@ Dice::Dice(vector <double> p){
     set_p(p);
 }
 
-Dice::Dice(int n){
+Dice::Dice(std::size_t n){
 
     if (n <= 0) return;
     this->n = n;
     p.resize(n);
-    for (int i = 0; i < n; i++)
+    for (std::size_t i = 0; i < n; i++)
         p[i] = (double)1/n;
 }
 
-Dice::Dice(int l, int r){
+Dice::Dice(std::size_t l, std::size_t r){
 
-    int n = l + rand()%(r-l+1);
+    std::size_t n = l + rand()%(r-l+1);
     vector <double> points;
 
-    for (int i = 0; i < n-1; i++)
+    for (std::size_t i = 0; i < n-1; i++)
         points.push_back((double)rand()/RAND_MAX);
     sort(points.begin(), points.end());
     points.push_back(1.);
@@ -33,34 +33,34 @@ Dice::Dice(int l, int r){
     this->n = n;
     p.resize(n);
     p[0] = points[0];
-    for(int i = 1; i < n; i++)
+    for(std::size_t i = 1; i < n; i++)
         p[i] = points[i] - points[i-1];
 }
 
 bool Dice::check(vector <double> p){
 
     double s = 0;
-    for(int i = 0; i < (int)p.size(); i++)
+    for(std::size_t i = 0; i < p.size(); i++)
         s += p[i];
 
     if (fabs(s - 1) < std::numeric_limits<double>::epsilon()) return true;
     return false;
 }
 
-string Dice::data(int t){
+string Dice::data(std::size_t t){
 
     string s;
-    for (int i = 0; i < t; i++)
+    for (std::size_t i = 0; i < t; i++)
         s += " ";
 
     s += "Number of edges = " + std::to_string(this->n) + '\n';
 
-    for (int i = 0; i < t; i++)
+    for (std::size_t i = 0; i < t; i++)
         s += " ";
 
     s += "P for each edge: ";
 
-    for(int i = 0; i < (int)this->p.size(); i++)
+    for(std::size_t i = 0; i < this->p.size(); i++)
         s += std::to_string(p[i]) + ' ';
     s += '\n';
 
@@ -80,7 +80,7 @@ bool Dice::set_p(vector <double> p){
     return false;
 }
 
-double Dice::get_p(int j){
+double Dice::get_p(std::size_t j){
 
     if (j < 0 || j >= n) return 0;
     return p[j];

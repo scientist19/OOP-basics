@@ -7,16 +7,26 @@
 class DiceSet
 {
     private:
-    vector <Dice*> set_ = {new Dice()};
+        //Vector of dices
+        vector <Dice*> set_ = {new Dice()};
 
     public:
+        //Create DiceSet with one dice
         DiceSet(){};
-        DiceSet(vector <Dice*>);
-        DiceSet(int, int, int, int);    //generate random set of dice with number of dice from l1 to r1
-                                        //and number of edges from l2 to r2
 
-        map <int, double> calc_p();     //calculates probability of each sum
-        string data();  // toString
+        //Create DiceSet with vector of dices set_
+        DiceSet(vector <Dice*> set_);
+
+        //Create a random DiceSet with number of dices from l1 to r1 and number of edges from l2 to r2
+        DiceSet(std::size_t l1, std::size_t r1, std::size_t l2, std::size_t r2);
+
+        //Calculates a probability of each sum
+        std::map <int, double> calc_p();
+
+        //Returns string - representation of DiceSet
+        string data();
+
+        //Maximal number of dices in the DiceSet
         static const int NMAX = 100;
 };
 
