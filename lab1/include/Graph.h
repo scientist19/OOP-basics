@@ -23,6 +23,10 @@ template <typename T> class Graph
         //Vector of pointers to vertices
         std::vector <T*> vertix;
 
+    private:
+        //Fills vector of pointers with pointers to empty objects
+        void fill_vertix();
+
     public:
 
         //Create an empty graph with no vertices

@@ -1,6 +1,5 @@
 #include "DiceSet.h"
 
-#include <iostream>
 
 DiceSet::DiceSet(vector <Dice*> set_){
 
