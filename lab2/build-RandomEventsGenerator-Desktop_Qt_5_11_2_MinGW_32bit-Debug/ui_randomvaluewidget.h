@@ -29,7 +29,6 @@ public:
     QSpacerItem *horizontalSpacer;
     QLabel *labelProbability;
     QDoubleSpinBox *probability;
-    QSpacerItem *horizontalSpacer_3;
     QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QWidget *RandomValueWidget)
@@ -71,10 +70,6 @@ public:
         probability->setSingleStep(0.05);
 
         horizontalLayout->addWidget(probability);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_3);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 

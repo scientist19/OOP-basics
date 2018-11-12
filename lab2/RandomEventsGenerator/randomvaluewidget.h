@@ -2,6 +2,7 @@
 #define RANDOMVALUEWIDGET_H
 
 #include <QWidget>
+#include <QDoubleSpinBox>
 
 namespace Ui {
 class RandomValueWidget;
@@ -19,6 +20,10 @@ public:
     void setValue(int value);
     void setLabelProbability(QString labelProbability);
     void setProbability(int probability);
+    int getValue();
+    double getProbability();
+    QDoubleSpinBox* probabilityWidget();
+
 private:
     Ui::RandomValueWidget *ui;
 };

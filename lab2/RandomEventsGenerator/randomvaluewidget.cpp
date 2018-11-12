@@ -6,8 +6,6 @@ RandomValueWidget::RandomValueWidget(QWidget *parent) :
     ui(new Ui::RandomValueWidget)
 {
     ui->setupUi(this);
-
-
 }
 
 RandomValueWidget::~RandomValueWidget()
@@ -33,4 +31,17 @@ void RandomValueWidget::setValue(int value){
 void RandomValueWidget::setProbability(int probability){
 
     ui->probability->setValue(probability);
+}
+
+int RandomValueWidget::getValue(){
+    return ui->value->value();
+}
+
+double RandomValueWidget::getProbability(){
+    return ui->probability->value();
+}
+
+QDoubleSpinBox* RandomValueWidget::probabilityWidget(){
+
+    return ui->probability;
 }
