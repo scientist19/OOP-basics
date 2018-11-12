@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 #include <QVector>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -18,10 +19,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     bool checkP();
+    bool checkRepeat();
 
 public slots:
     void addRandomValues();
     void onProbabilityChange();
+    void onNumberChange();
+    void generateRandomValues();
 
 
 private:
@@ -31,6 +35,7 @@ private:
 
     int randomValuesNumber = 0;
     QVector <RandomValueWidget*> RandomValuesList;
+    QVector <QLabel*> resultsList;
 };
 
 #endif // MAINWINDOW_H

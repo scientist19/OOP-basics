@@ -66,6 +66,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(914, 509);
+        MainWindow->setMaximumSize(QSize(16777215, 16777215));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -104,7 +105,7 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
@@ -243,6 +244,9 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(randomValuesNumber, SIGNAL(valueChanged(int)), MainWindow, SLOT(addRandomValues()));
         QObject::connect(randomValuesNumber, SIGNAL(valueChanged(int)), MainWindow, SLOT(onProbabilityChange()));
+        QObject::connect(experimentsNumber, SIGNAL(valueChanged(int)), MainWindow, SLOT(onNumberChange()));
+        QObject::connect(randomValuesNumber, SIGNAL(valueChanged(int)), MainWindow, SLOT(onNumberChange()));
+        QObject::connect(generateButton, SIGNAL(clicked()), MainWindow, SLOT(generateRandomValues()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi

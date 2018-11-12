@@ -29,6 +29,7 @@ public:
     QSpacerItem *horizontalSpacer;
     QLabel *labelProbability;
     QDoubleSpinBox *probability;
+    QSpacerItem *horizontalSpacer_3;
     QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QWidget *RandomValueWidget)
@@ -50,8 +51,8 @@ public:
 
         value = new QSpinBox(RandomValueWidget);
         value->setObjectName(QStringLiteral("value"));
-        value->setMinimum(-100);
-        value->setMaximum(100);
+        value->setMinimum(-999);
+        value->setMaximum(999);
 
         horizontalLayout->addWidget(value);
 
@@ -70,6 +71,10 @@ public:
         probability->setSingleStep(0.05);
 
         horizontalLayout->addWidget(probability);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
