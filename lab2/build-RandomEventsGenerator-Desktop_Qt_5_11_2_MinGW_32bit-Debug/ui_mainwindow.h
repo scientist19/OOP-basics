@@ -34,10 +34,6 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
-    QPushButton *addSet;
-    QPushButton *chooseSet;
-    QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_2;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout_2;
@@ -73,43 +69,16 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        addSet = new QPushButton(centralWidget);
-        addSet->setObjectName(QStringLiteral("addSet"));
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(addSet->sizePolicy().hasHeightForWidth());
-        addSet->setSizePolicy(sizePolicy);
-
-        horizontalLayout->addWidget(addSet);
-
-        chooseSet = new QPushButton(centralWidget);
-        chooseSet->setObjectName(QStringLiteral("chooseSet"));
-        sizePolicy.setHeightForWidth(chooseSet->sizePolicy().hasHeightForWidth());
-        chooseSet->setSizePolicy(sizePolicy);
-
-        horizontalLayout->addWidget(chooseSet);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
-
-        verticalLayout->addLayout(horizontalLayout);
-
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy);
         groupBox->setMinimumSize(QSize(400, 200));
         QFont font;
         font.setPointSize(10);
@@ -151,7 +120,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 416, 289));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 416, 326));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_2->addWidget(scrollArea);
@@ -161,11 +130,11 @@ public:
 
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
-        groupBox_2->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
+        groupBox_2->setSizePolicy(sizePolicy1);
         groupBox_2->setMinimumSize(QSize(0, 0));
         groupBox_2->setFont(font);
         verticalLayout_3 = new QVBoxLayout(groupBox_2);
@@ -186,8 +155,11 @@ public:
         generateButton = new QPushButton(groupBox_2);
         generateButton->setObjectName(QStringLiteral("generateButton"));
         generateButton->setEnabled(false);
-        sizePolicy.setHeightForWidth(generateButton->sizePolicy().hasHeightForWidth());
-        generateButton->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(generateButton->sizePolicy().hasHeightForWidth());
+        generateButton->setSizePolicy(sizePolicy2);
         generateButton->setFont(font2);
 
         gridLayout->addWidget(generateButton, 1, 4, 1, 1);
@@ -213,12 +185,12 @@ public:
 
         scrollArea_2 = new QScrollArea(groupBox_2);
         scrollArea_2->setObjectName(QStringLiteral("scrollArea_2"));
-        sizePolicy2.setHeightForWidth(scrollArea_2->sizePolicy().hasHeightForWidth());
-        scrollArea_2->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(scrollArea_2->sizePolicy().hasHeightForWidth());
+        scrollArea_2->setSizePolicy(sizePolicy1);
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 415, 257));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 415, 294));
         scrollArea_2->setWidget(scrollAreaWidgetContents_2);
 
         verticalLayout_3->addWidget(scrollArea_2);
@@ -254,8 +226,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        addSet->setText(QApplication::translate("MainWindow", "ADD SET", nullptr));
-        chooseSet->setText(QApplication::translate("MainWindow", "CHOOSE SET", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Random values setting", nullptr));
         label->setText(QApplication::translate("MainWindow", "Number of random values", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Results of random events", nullptr));

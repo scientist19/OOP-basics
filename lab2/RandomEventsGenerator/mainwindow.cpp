@@ -131,5 +131,46 @@ void MainWindow::generateRandomValues(){
             ScrollWidget2->layout()->addWidget(result);
         }
     }
+    else{
+
+        QVector <RandomValueWidget*> list;
+        for (int i = 0; i < randomValuesNumber; i++)
+            list.push_back(RandomValuesList[i]);
+
+        int pr = 100;
+        for (int i = 0; i < ui->experimentsNumber->value(); i++){
+
+            qDebug() << i;
+            double x = (rand() % pr)/ (double)100;
+            double sp = 0;
+            int j = 0;
+
+            while (sp <= x){
+                sp += list[j]->getProbability();
+                j++;
+            }
+            qDebug() << x << " " << sp << " " << j;
+            QLabel* result = new QLabel(
+                                         QString::number(i+1) + ".)   " +
+                                         QString::number(list[j-1]->getValue()) +
+                                         // "  (value #" + QString::number(j) +
+                                         "  (p = " +
+                                         QString::number(list[j-1]->getProbability()) + ")"
+                                        );
+            QFont font = QFont();
+            font.setPointSize(12);
+            result->setFont(font);
+            qDebug() << result->text();
+            resultsList.push_back(result);
+            ScrollWidget2->layout()->addWidget(result);
+
+            int cur_pr = list[j-1]->getProbability()*100;
+            if (list[j-1]->getProbability() >= 0.3) cur_pr++;
+
+            pr -= cur_pr;
+            qDebug() << "PR === " << pr;
+            list.erase(list.begin() + j-1);
+        }
+    }
 }
 
