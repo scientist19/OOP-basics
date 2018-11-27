@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/rec">
+        <file>img/download.jpg</file>
+        <file>img/w256h2561372348486openfile256.png</file>
+        <file>img/dice_PNG108.png</file>
+    </qresource>
+</RCC>

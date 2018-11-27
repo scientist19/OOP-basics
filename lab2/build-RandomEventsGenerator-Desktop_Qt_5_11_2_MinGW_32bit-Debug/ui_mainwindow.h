@@ -10,6 +10,8 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGridLayout>
@@ -17,6 +19,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
@@ -32,6 +35,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionSave;
+    QAction *actionOpen;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
@@ -54,6 +59,7 @@ public:
     QScrollArea *scrollArea_2;
     QWidget *scrollAreaWidgetContents_2;
     QMenuBar *menuBar;
+    QMenu *menuFile;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -63,6 +69,19 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(914, 509);
         MainWindow->setMaximumSize(QSize(16777215, 16777215));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/rec/img/dice_PNG108.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
+        actionSave = new QAction(MainWindow);
+        actionSave->setObjectName(QStringLiteral("actionSave"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/rec/img/download.jpg"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSave->setIcon(icon1);
+        actionOpen = new QAction(MainWindow);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/rec/img/w256h2561372348486openfile256.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionOpen->setIcon(icon2);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -120,7 +139,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 416, 326));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 383, 340));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_2->addWidget(scrollArea);
@@ -161,6 +180,7 @@ public:
         sizePolicy2.setHeightForWidth(generateButton->sizePolicy().hasHeightForWidth());
         generateButton->setSizePolicy(sizePolicy2);
         generateButton->setFont(font2);
+        generateButton->setCursor(QCursor(Qt::PointingHandCursor));
 
         gridLayout->addWidget(generateButton, 1, 4, 1, 1);
 
@@ -190,7 +210,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 415, 294));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 407, 308));
         scrollArea_2->setWidget(scrollAreaWidgetContents_2);
 
         verticalLayout_3->addWidget(scrollArea_2);
@@ -205,13 +225,22 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 914, 26));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        MainWindow->addToolBar(Qt::LeftToolBarArea, mainToolBar);
+        MainWindow->insertToolBarBreak(mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+
+        menuBar->addAction(menuFile->menuAction());
+        menuFile->addAction(actionSave);
+        menuFile->addAction(actionOpen);
+        mainToolBar->addAction(actionOpen);
+        mainToolBar->addAction(actionSave);
 
         retranslateUi(MainWindow);
         QObject::connect(randomValuesNumber, SIGNAL(valueChanged(int)), MainWindow, SLOT(addRandomValues()));
@@ -226,12 +255,15 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        actionSave->setText(QApplication::translate("MainWindow", "Save", nullptr));
+        actionOpen->setText(QApplication::translate("MainWindow", "Open", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Random values setting", nullptr));
         label->setText(QApplication::translate("MainWindow", "Number of random values", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Results of random events", nullptr));
         checkBox->setText(QApplication::translate("MainWindow", "With repeat", nullptr));
         generateButton->setText(QApplication::translate("MainWindow", "Generate", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "Number of experiments", nullptr));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

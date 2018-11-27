@@ -6,6 +6,8 @@
 #include <QVBoxLayout>
 #include <QtGui>
 #include <cmath>
+#include <fstream>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,6 +33,21 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::addRandomValue(int value, double p, int number){
+
+    RandomValueWidget* randomValue = new RandomValueWidget();
+
+    randomValue->setLabelValue("Value #" + QString::number(number));
+    randomValue->setLabelProbability("Probability " + QString::number(number));
+    randomValue->setValue(value);
+    randomValue->setProbability(p);
+    connect(randomValue->probabilityWidget(), SIGNAL(valueChanged(double)),this, SLOT(onProbabilityChange()));
+    connect(randomValue->probabilityWidget(), SIGNAL(valueChanged(double)),this, SLOT(onNumberChange()));
+
+    ScrollWidget->layout()->addWidget(randomValue);
+    RandomValuesList.push_back(randomValue);
+}
+
 void MainWindow::addRandomValues(){
 
     static int ind = -1;
@@ -38,16 +55,7 @@ void MainWindow::addRandomValues(){
 
         for (int i = randomValuesNumber; i < ui->randomValuesNumber->value(); i++){
 
-            RandomValueWidget* randomValue = new RandomValueWidget();
-
-            randomValue->setLabelValue("Value #" + QString::number(i+1));
-            randomValue->setLabelProbability("Probaility " + QString::number(i+1));
-            randomValue->setValue(i+1);
-            connect(randomValue->probabilityWidget(), SIGNAL(valueChanged(double)),this, SLOT(onProbabilityChange()));
-            connect(randomValue->probabilityWidget(), SIGNAL(valueChanged(double)),this, SLOT(onNumberChange()));
-
-            ScrollWidget->layout()->addWidget(randomValue);
-            RandomValuesList.push_back(randomValue);
+            addRandomValue(i+1, 0, i+1);
             qDebug() << "push_back ind = " << ++ind;
         }
     }
@@ -100,6 +108,7 @@ void MainWindow::onNumberChange(){
 
 void MainWindow::generateRandomValues(){
 
+    srand(randSeed);
     for (int i = 0; i < resultsList.size(); i++)
         resultsList[i]->~QLabel();
     resultsList.clear();
@@ -165,6 +174,7 @@ void MainWindow::generateRandomValues(){
             ScrollWidget2->layout()->addWidget(result);
 
             int cur_pr = list[j-1]->getProbability()*100;
+            qDebug() << "PPP " << list[j-1]->getProbability() << "   " << cur_pr;
             if (list[j-1]->getProbability() >= 0.3) cur_pr++;
 
             pr -= cur_pr;
@@ -172,5 +182,69 @@ void MainWindow::generateRandomValues(){
             list.erase(list.begin() + j-1);
         }
     }
+
+    oldRandSeed = randSeed;
+    randSeed = time(0);
 }
 
+
+void MainWindow::saveData(QString fileName){
+
+    QFile file(fileName);
+    file.open(QIODevice::WriteOnly);
+
+    QTextStream out(&file);
+    out << randomValuesNumber << " ";
+
+    for (int i = 0; i < randomValuesNumber; i++)
+        out << RandomValuesList[i]->getValue() << " "
+            << RandomValuesList[i]->getProbability() << " ";
+
+    out << ui->experimentsNumber->value() << " "
+        << ui->checkBox->isChecked() << " "
+        << oldRandSeed;
+
+    file.close();
+}
+
+void MainWindow::openData(QString fileName){
+
+    for (int i = 0; i < randomValuesNumber; i++)
+        RandomValuesList[i]->~RandomValueWidget();
+    RandomValuesList.clear();
+
+    QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
+
+    QTextStream in(&file);
+    in >> randomValuesNumber;
+
+    int v;
+    double p;
+    for (int i = 0; i < randomValuesNumber; i++){
+        in >> v >> p;
+        addRandomValue(v, p, i+1);
+    }
+
+    int expNumber, withRepeat;
+    in >> expNumber >> withRepeat >> randSeed;
+    file.close();
+
+    ui->randomValuesNumber->setValue(randomValuesNumber);
+    ui->experimentsNumber->setValue(expNumber);
+    ui->checkBox->setChecked(withRepeat);
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file as..."), "saves/untitled.dat",
+                                                    tr("Files (*.dat)"));
+    saveData(fileName);
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file..."), "saves",
+                                                    tr("Files (*.dat)"));
+    openData(fileName);
+}

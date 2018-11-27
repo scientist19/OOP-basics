@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QVector>
 #include <QLabel>
+#include <QFile>
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +28,12 @@ public slots:
     void onNumberChange();
     void generateRandomValues();
 
+private slots:
+    void on_actionSave_triggered();
+    void saveData(QString fileName);
+    void openData(QString fileName);
+
+    void on_actionOpen_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -34,8 +41,12 @@ private:
     QWidget* ScrollWidget2;
 
     int randomValuesNumber = 0;
+    int randSeed = time(0);
+    int oldRandSeed = randSeed;
     QVector <RandomValueWidget*> RandomValuesList;
     QVector <QLabel*> resultsList;
+
+    void addRandomValue(int value, double p, int number);
 };
 
 #endif // MAINWINDOW_H

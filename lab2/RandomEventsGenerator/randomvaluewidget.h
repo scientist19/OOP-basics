@@ -19,7 +19,7 @@ public:
     void setLabelValue(QString labelValue);
     void setValue(int value);
     void setLabelProbability(QString labelProbability);
-    void setProbability(int probability);
+    void setProbability(double probability);
     int getValue();
     double getProbability();
     QDoubleSpinBox* probabilityWidget();

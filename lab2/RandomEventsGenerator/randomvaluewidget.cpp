@@ -28,7 +28,7 @@ void RandomValueWidget::setValue(int value){
     ui->value->setValue(value);
 }
 
-void RandomValueWidget::setProbability(int probability){
+void RandomValueWidget::setProbability(double probability){
 
     ui->probability->setValue(probability);
 }
