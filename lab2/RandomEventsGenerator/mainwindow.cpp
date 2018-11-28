@@ -44,7 +44,11 @@ void MainWindow::addRandomValue(int value, double p, int number){
     connect(randomValue->probabilityWidget(), SIGNAL(valueChanged(double)),this, SLOT(onProbabilityChange()));
     connect(randomValue->probabilityWidget(), SIGNAL(valueChanged(double)),this, SLOT(onNumberChange()));
 
+    ScrollWidget->layout()->removeItem(Spacer);
+
     ScrollWidget->layout()->addWidget(randomValue);
+
+    ScrollWidget->layout()->addItem(Spacer);
     RandomValuesList.push_back(randomValue);
 }
 
@@ -93,6 +97,11 @@ bool MainWindow::checkRepeat(){
 
 void MainWindow::onProbabilityChange(){
 
+    double sum = 0;
+    for (int i = 0; i < randomValuesNumber; i++)
+        sum += RandomValuesList[i]->getProbability();
+    ui->sumP->setText(QString::number(sum));
+
     if (checkP()) ui->generateButton->setEnabled(true);
     else ui->generateButton->setEnabled(false);
 }
@@ -103,6 +112,31 @@ void MainWindow::onNumberChange(){
     else {
         ui->checkBox->setEnabled(false);
         ui->checkBox->setChecked(true);
+    }
+}
+
+void MainWindow::balanceRandomValues(){
+
+    if (randomValuesNumber == 0) return;
+    double sum;
+    for (int i = 0; i < randomValuesNumber; i++)
+        sum += RandomValuesList[i]->getProbability();
+
+    if (sum == 1) return;
+
+    if (sum < 1){
+
+        RandomValuesList[0]->setProbability(RandomValuesList[0]->getProbability() + 1 - sum);
+        return;
+    }
+
+    int i = randomValuesNumber-1;
+    while (sum > 1){
+
+        double d = std::min(sum-1, RandomValuesList[i]->getProbability());
+        RandomValuesList[i]->setProbability(RandomValuesList[i]->getProbability() - d);
+        sum -= d;
+        i--;
     }
 }
 
@@ -137,7 +171,10 @@ void MainWindow::generateRandomValues(){
             result->setFont(font);
             qDebug() << result->text();
             resultsList.push_back(result);
+
+            ScrollWidget2->layout()->removeItem(Spacer);
             ScrollWidget2->layout()->addWidget(result);
+            ScrollWidget2->layout()->addItem(Spacer);
         }
     }
     else{
@@ -171,7 +208,10 @@ void MainWindow::generateRandomValues(){
             result->setFont(font);
             qDebug() << result->text();
             resultsList.push_back(result);
+
+            ScrollWidget2->layout()->removeItem(Spacer);
             ScrollWidget2->layout()->addWidget(result);
+            ScrollWidget2->layout()->addItem(Spacer);
 
             int cur_pr = list[j-1]->getProbability()*100;
             qDebug() << "PPP " << list[j-1]->getProbability() << "   " << cur_pr;
@@ -237,14 +277,14 @@ void MainWindow::openData(QString fileName){
 
 void MainWindow::on_actionSave_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file as..."), "saves/untitled.dat",
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save file as..."), "../RandomEventsGenerator/saves/untitled.dat",
                                                     tr("Files (*.dat)"));
     saveData(fileName);
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file..."), "saves",
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file..."), "../RandomEventsGenerator/saves",
                                                     tr("Files (*.dat)"));
     openData(fileName);
 }
